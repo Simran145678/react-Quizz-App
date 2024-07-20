@@ -11,25 +11,21 @@
 <li>Highlights correct and incorrect answers</li>
 <li>Shows the final score</li>
 <li>Option to retake the quiz</li>
+</ul>
+Installation<br>
+Clone the repository:<br>
+git clone https://github.com/simran145678/quiz-app.git<br>
+cd quiz-app<br><br>
 
-Installation
-Clone the repository:
+Install dependencies:<br>
+npm install<br><br>
 
-###Copy code
-git clone https://github.com/simran145678/quiz-app.git
-cd quiz-app
+Start the development server:<br>
+npm run dev<br><br>
 
-###Install dependencies:
-npm install
-
-###Start the development server:
-npm run dev
-
-API
+API<br><br>
 This app uses the Open Trivia Database API to fetch quiz questions. The API endpoint used is:
-
-arduino
-Copy code
+<br>
 https://opentdb.com/api.php?amount=5
 
 <p>Components</p>
