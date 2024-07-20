@@ -34,24 +34,23 @@ This app uses the Open Trivia Database API to fetch quiz questions. The API endp
 arduino
 Copy code
 https://opentdb.com/api.php?amount=5
-Components
+
+<p>Components</p>
 App.js
-Manages the main state of the application.
-Renders the intro page and quiz components.
+<ul>
+<li?>Renders the intro page and quiz components.</li>
+</ul>
 Quiz.js
-Fetches quiz questions using useEffect.
-Renders the questions and options.
-Manages user answers and handles answer checking.
-Displays individual questions and their options.
-Highlights correct and incorrect answers based on the user's selection.
+<ul>
+<li?>Manages the main state of the application.</li>
+<li>Fetches quiz questions using useEffect.</li>
+<li>Renders the questions and options.</li>
+<li>Manages user answers and handles answer checking.</li>
+<li>Displays individual questions and their options.</li>
+<li>Highlights correct and incorrect answers based on the user's selection.</li>
+</ul>
 Styling
-Tailwind CSS is used for styling the application.
-Tailwind classes are applied directly in the JSX elements.
-Example:
-jsx
-Copy code
-<button className="bg-blue-500 text-white px-4 py-2 rounded">
-Start Quiz
-</button>
-License
-This project is licensed under the MIT License.
+<ul>
+<li>Tailwind CSS is used for styling the application.</li>
+<li>Tailwind classes are applied directly in the JSX elements.</li>
+</ul>
