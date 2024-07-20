@@ -8,21 +8,25 @@ export default function Quiz() {
 
   React.useEffect(() => fetchQuestions, []);
 
-  const fetchQuestions = () => {
-    fetch("https://opentdb.com/api.php?amount=5")
-      .then((response) => response.json())
-      .then((data) => {
-        const formattedQuestions = data.results.map((question, index) => ({
-          ...question,
-          id: index,
-          options: shuffleArray([
-            ...question.incorrect_answers,
-            question.correct_answer,
-          ]),
-        }));
-        setQuestions(formattedQuestions);
-        console.log(formattedQuestions);
-      });
+  const fetchQuestions = async () => {
+    try {
+      const response = await fetch("https://opentdb.com/api.php?amount=5");
+      if (response.status === 429) {
+        throw new Error("Too Many Requests. Please try again later.");
+      }
+      const data = await response.json();
+      const formattedQuestions = data.results.map((question, index) => ({
+        ...question,
+        id: index,
+        options: shuffleArray([
+          ...question.incorrect_answers,
+          question.correct_answer,
+        ]),
+      }));
+      setQuestions(formattedQuestions);
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   console.log(checked);
