@@ -15,17 +15,14 @@
 Installation
 Clone the repository:
 
-Copy code
+###Copy code
 git clone https://github.com/simran145678/quiz-app.git
 cd quiz-app
-Install dependencies:
 
-Copy code
+###Install dependencies:
 npm install
-Start the development server:
 
-bash
-Copy code
+###Start the development server:
 npm run dev
 
 API
