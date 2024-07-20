@@ -4,26 +4,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        yellow: {
-          100: "#fffbe9",
-          300: "#ffee32",
-          500: "#fdca00",
-        },
-        orange: {
-          200: "#ffa500",
+        purple: {
+          100: "#F5F7FB",
+          500: "#4D5B9E",
+          800: "#293264",
         },
         gray: {
+          100: "#F5F7FB",
           800: "#484848",
           900: "#242038",
         },
+        red: {
+          200: "#F8BCBC",
+        },
+        green: {
+          200: "#94D7A2",
+        },
       },
-      fontFamily: {
-        noto: ["Noto Serif", "serif"],
-        nunito: ['"Nunito", sans-serif'],
-      },
-      boxShadow: {
-        100: "rgba(255, 251, 233, 0.1) 0px 10px 15px -3px inset, rgba(255, 251, 233, 0.1) 0px 4px 6px -4px;",
-      },
+
       opacity: {
         0: "0",
         100: "100",

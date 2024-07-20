@@ -2,8 +2,9 @@ import React from "react";
 
 export default function Quiz() {
   const [questions, setQuestions] = React.useState([]);
+  const [checked, setChecked] = React.useState(false);
   const [answers, setAnswers] = React.useState({});
-  const [score, setScore] = React.useState(0);
+  const [score, setScore] = React.useState(null);
 
   React.useEffect(() => fetchQuestions, []);
 
@@ -20,12 +21,16 @@ export default function Quiz() {
           ]),
         }));
         setQuestions(formattedQuestions);
+        console.log(formattedQuestions);
       });
   };
+
+  console.log(checked);
 
   const handleRetakeQuiz = () => {
     setAnswers({});
     setScore(null);
+    setChecked(false);
     fetchQuestions();
   };
 
@@ -37,7 +42,7 @@ export default function Quiz() {
     return array;
   };
 
-  const handleChange = (questionId, answer) => {
+  const handleAnswerClick = (questionId, answer) => {
     setAnswers({
       ...answers,
       [questionId]: answer,
@@ -49,38 +54,81 @@ export default function Quiz() {
     questions.forEach((question) => {
       if (answers[question.id] === question.correct_answer) {
         newScore += 1;
+        setChecked(true);
       }
     });
     setScore(newScore);
   };
 
   return (
-    <div className="quiz">
-      {questions.map((question) => (
-        <div key={question.id} className="question">
-          <h3 dangerouslySetInnerHTML={{ __html: question.question }} />
-          {question.options.map((option) => (
-            <div key={option} className="option">
-              <label>
-                <input
-                  type="radio"
-                  name={question.id}
-                  value={option}
-                  checked={answers[question.id] === option}
-                  onChange={() => handleChange(question.id, option)}
-                />
-                <span dangerouslySetInnerHTML={{ __html: option }} />
-              </label>
+    <div className="w-full flex justify-center h-full bg-gray-100 p-20">
+      <div className=" flex flex-col justify-evenly ">
+        {questions.map((question) => (
+          <div key={question.id} className="text-purple-800 my-3 ">
+            <h3
+              dangerouslySetInnerHTML={{ __html: question.question }}
+              className="font-bold"
+            />
+            <div className="flex  my-2">
+              {question.options.map((option) =>
+                !checked ? (
+                  <button
+                    key={option}
+                    className={`${
+                      answers[question.id] === option
+                        ? "bg-purple-800 text-purple-100 border border-purple-800 py-1 px-6 mx-2 rounded-xl"
+                        : "text-purple-800 border border-purple-800 py-1 px-6 mx-2 rounded-xl"
+                    }`}
+                    disabled={checked}
+                    onClick={() => handleAnswerClick(question.id, option)}
+                    dangerouslySetInnerHTML={{ __html: option }}
+                  />
+                ) : (
+                  <button
+                    key={option}
+                    className={` 
+                   ${
+                     answers[question.id] === option &&
+                     answers[question.id] === question.correct_answer
+                       ? "bg-green-200 text-purple-100 border border-green-500 py-1 px-6 mx-2 rounded-xl"
+                       : answers[question.id] === option &&
+                         answers[question.id] !== question.correct_answer
+                       ? "bg-red-200 border text-purple-100 border-red-500 py-1 px-6 mx-2 rounded-xl"
+                       : "text-purple-500 border border-purple-500 py-1 px-6 mx-2 rounded-xl"
+                   }
+                   
+                 
+                   `}
+                    disabled={checked}
+                    onClick={() => handleAnswerClick(question.id, option)}
+                    dangerouslySetInnerHTML={{ __html: option }}
+                  />
+                )
+              )}
             </div>
-          ))}
-        </div>
-      ))}
+          </div>
+        ))}
 
-      <button onClick={handleCheckAnswers}>Check Answers</button>
-
-      <div>
-        <h3>Your Score: {score} / 5</h3>
-        <button onClick={handleRetakeQuiz}>Retake Quiz</button>
+        {score === null ? (
+          <div>
+            <button
+              className="bg-purple-500 text-md py-2 px-8 text-gray-100 rounded-xl"
+              onClick={handleCheckAnswers}
+            >
+              Check Answers
+            </button>
+          </div>
+        ) : (
+          <div className="flex items-end">
+            <h3 className="mr-6 text-2xl">Your Score: {score} / 5</h3>
+            <button
+              className="bg-purple-500 text-md py-2 px-8 text-gray-100 rounded-xl"
+              onClick={handleRetakeQuiz}
+            >
+              Retake Quiz
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
